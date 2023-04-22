@@ -1,1 +1,110 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap");
+
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+
+// VARIABLES
+:root {
+  // TEXT VARIABLES
+  --standard-font: "Source Sans Pro", sans-serif;
+
+  --text-size-sm: 12px;
+  --text-size-standard: 14px;
+  --text-size-md: 16px;
+  --text-size-lg: 26px;
+  --text-size-xl: 40px;
+
+  --text-dark: #191444;
+  --text-secondary: #74728f;
+  --text-white: #fff;
+  --text-light: #a3a1b5;
+  --text-danger: #ff3b30;
+  --text-success: #1e9032;
+  --text-warning: #fe8f02;
+
+  --line-height-sm: 15px;
+  --line-height-standard: 18px;
+  --line-height-md: 20px;
+  --line-height-lg: 33px;
+  --line-height-xl: 50px;
+
+  // SPACING VARIABLES
+  --spacing-xs: 15px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+
+  // COLOR VARIABLES
+  --bg-white: #fff;
+  --bg-light: #f7f9fc;
+
+  // OTHER VARIABLES
+  --border-color-secondary: #a3a1b5;
+  --border-color-warning: #fe8f02;
+
+  --sm-border-radius: 4px;
+  --standard-border-radius: 6px;
+
+  --md-box-shadow: 0px 8px 12px rgba(64, 107, 194, 0.1),
+    0px 4px 12px rgba(64, 107, 194, 0.06);
+  --standard-box-shadow: 0px 2px 12px rgba(64, 107, 194, 0.1),
+    0px 2px 12px rgba(64, 107, 194, 0.06);
+  --sm-box-shadow: 0px 2px 6px rgba(64, 107, 194, 0.06);
+  --xs-box-shadow: 0px 4px 8px rgba(254, 143, 2, 0.5),
+    0px 2px 2px rgba(254, 143, 2, 0.25);
+
+  --primary-gradient: linear-gradient(0deg, #fe7401 0%, #fe8f02 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  // width: 100%;
+  // position: relative;
+  // overflow-x: hidden;
+}
+
+body {
+  font-family: var(--standard-font);
+  font-size: var(--text-size-standard);
+  color: var(--text-dark);
+  line-height: (var(--line-height-standard));
+}
+
+.modal-header {
+}
+
+.modal-body {
+  width: 550px;
+  max-width: 75%;
+  margin: 0 auto;
+
+  h4 {
+    font-size: var(--text-size-xl);
+    font-weight: 700;
+    line-height: var(--line-height-xl);
+    margin-bottom: 6px;
+    text-align: center;
+  }
+
+  & > p {
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 50px;
+  }
+
+  h6 {
+    font-size: var(--text-size-sm);
+    font-size: var(--line-height-sm);
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+}
