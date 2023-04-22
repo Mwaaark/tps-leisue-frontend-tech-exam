@@ -1,0 +1,103 @@
+<div class="modal-header">
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <h4>Add Queue</h4>
+  <p>Fill-up fields with the customer’s data</p>
+  <form [formGroup]="newQueueForm">
+    <h6>Customer Details</h6>
+    <div class="row">
+      <div class="col">
+        <div class="input-wrapper">
+          <label for="mobileNumberInput">Mobile Number</label>
+          <input
+            type="text"
+            id="mobileNumberInput"
+            class="form-control"
+            placeholder="+63 900-000-0000"
+            aria-label="Mobile Number"
+            formControlName="phoneNumber"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="input-wrapper people-count-input d-flex flex-column">
+          <label for="peopleCountInput" class="text-center"
+            >How many people?</label
+          >
+          <div class="people-count-input d-flex justify-content-between">
+            <img
+              src="assets/images/add-input-icon.svg"
+              alt=""
+              (click)="incrementPeopleCount()"
+            />
+            <input
+              type="number"
+              id="peopleCountInput"
+              class="form-control"
+              aria-label="How many people?"
+              formControlName="peopleCount"
+            />
+            <img
+              src="assets/images/minus-input-icon.svg"
+              alt=""
+              (click)="decrementPeopleCount()"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="input-wrapper name-input">
+          <input
+            type="text "
+            class="form-control"
+            placeholder="Name (Optional)"
+            formControlName="name"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div
+          class="d-flex form-switch-wrapper justify-content-between align-items-center"
+        >
+          <div class="form-switch-label">
+            <p>Is this queue a priority? (ex. PWD, Senior Citizen, etc.)</p>
+            <p>
+              If ON, this customer will be at the top of the queue. Will be
+              tagged as “Walk-in Prio”
+            </p>
+          </div>
+          <div>
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="isPriorityQueueSwichInput"
+                formControlName="queueType"
+              />
+              <label
+                class="form-check-label"
+                for="isPriorityQueueSwichInput"
+              ></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <button type="button" (click)="addNewQueue()">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

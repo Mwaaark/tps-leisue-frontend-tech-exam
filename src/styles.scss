@@ -74,37 +74,3 @@ body {
   color: var(--text-dark);
   line-height: (var(--line-height-standard));
 }
-
-.modal-header {
-}
-
-.modal-body {
-  width: 550px;
-  max-width: 75%;
-  margin: 0 auto;
-
-  h4 {
-    font-size: var(--text-size-xl);
-    font-weight: 700;
-    line-height: var(--line-height-xl);
-    margin-bottom: 6px;
-    text-align: center;
-  }
-
-  & > p {
-    font-size: 20px;
-    line-height: 25px;
-    text-align: center;
-    color: var(--text-secondary);
-    margin-bottom: 50px;
-  }
-
-  h6 {
-    font-size: var(--text-size-sm);
-    font-size: var(--line-height-sm);
-    font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-}
