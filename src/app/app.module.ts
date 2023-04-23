@@ -3,26 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
-import { AddQueueComponent } from './add-queue/add-queue.component';
+import { QueueModule } from './queue/queue.module';
+import { FormsModule } from '@angular/forms';
+import { QueueRoutingModule } from './queue/queue-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, AddQueueComponent],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    QueueRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    FontAwesomeModule,
-    FontAwesomeModule,
-    NgbDropdownModule,
-    Ng2SearchPipeModule,
+    QueueModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

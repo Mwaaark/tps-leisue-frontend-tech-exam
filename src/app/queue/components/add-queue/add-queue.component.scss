@@ -1,9 +1,31 @@
 ::ng-deep {
+  .modal {
+    background-color: var(--bg-white) !important;
+  }
+
   .modal-header {
-    // later
+    padding: 0;
+    border: none;
+    padding: 38px 53px 27px;
+
+    button {
+      border: none;
+      background: transparent;
+      padding: 0;
+    }
+
+    p {
+      font-weight: 600;
+      font-size: 10px;
+      line-height: 13px;
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
   }
 
   .modal-body {
+    padding-top: 0px;
     width: 550px;
     max-width: 75%;
     margin: 0 auto;
@@ -38,6 +60,10 @@
       box-shadow: inset 0px 4px 8px 1px #f3f6fc;
       border-radius: var(--sm-border-radius);
       padding: 8px var(--spacing-sm) 10px;
+
+      &:has(.ng-invalid.ng-touched) {
+        border: 1px solid red;
+      }
 
       label {
         font-weight: 600;
@@ -102,9 +128,9 @@
         }
 
         /* Firefox */
-        input[type="number"] {
-          -moz-appearance: textfield;
-        }
+        // input[type="number"] {
+        //   -moz-appearance: textfield;
+        // }
       }
     }
 

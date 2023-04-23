@@ -1,0 +1,315 @@
+<!-- breadcrumbs -->
+<section class="breadcrumbs">
+  <p class="m-0">
+    <a href="#">Queue Management</a>
+    <img
+      src="assets/images/breadcrumbs-arrow.png"
+      class="breadcrumbs-divider"
+    />
+    <span class="active-breadcrumbs">Cashier 4 </span>
+  </p>
+</section>
+
+<!-- queue header -->
+<section class="queue-header">
+  <div class="row align-items-center">
+    <div class="col-12 col-3 col-md-3">
+      <p class="m-0">Payment</p>
+      <h2 class="m-0">Cashier 4</h2>
+      <!-- balikan mo -->
+      <p class="m-0">
+        Single Serving
+        <img src="assets/images/info-icon.svg" alt="" class="button-icon" />
+      </p>
+    </div>
+    <div class="col-12 col-md-9">
+      <div class="d-flex justify-content-end flex-column flex-md-row">
+        <button type="button">Queue Group Details</button>
+        <button type="button">
+          <img
+            src="assets/images/history-icon.svg"
+            alt=""
+            class="button-icon"
+          />Queue History
+        </button>
+
+        <button type="button" (click)="openFullscreen()">
+          <img src="assets/images/add-icon.svg" alt="" class="button-icon" />
+          Add Queue
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- queue body -->
+<section class="queue-body">
+  <!-- search input -->
+  <div class="search-input input-group">
+    <input
+      type="search"
+      class="form-control border-end-0"
+      placeholder="Search Queue Number, Mobile Number or Name"
+      [(ngModel)]="searchTerm"
+    />
+    <span class="input-group-text bg-white"
+      ><img src="assets/images/search-icon.svg" alt=""
+    /></span>
+  </div>
+
+  <div class="queue-wrapper">
+    <div class="row">
+      <!-- on-going queues -->
+      <div class="col-12 col-md-8">
+        <div class="queue-card">
+          <div class="queue-card-header">
+            <h5>ON-GOING QUEUE</h5>
+            <p class="mb-0">List of all on-going customer queues</p>
+          </div>
+
+          <div class="queue-card-body">
+            <div class="on-going-queue">
+              <div class="on-going-queue-header">
+                <div class="row">
+                  <div class="col">
+                    <h6 class="text-center">Queue Number</h6>
+                  </div>
+                  <div class="col">
+                    <h6>Customer Info</h6>
+                  </div>
+                  <div class="col">
+                    <h6 class="text-center">Type / Time Queued</h6>
+                  </div>
+                  <div class="col-1">
+                    <h6 class="text-center">Options</h6>
+                  </div>
+                  <div class="col-1">
+                    <h6 class="text-center">Serve</h6>
+                  </div>
+                </div>
+              </div>
+
+              <div class="on-going-queue-list" *ngIf="onGoingQueues.length">
+                <div
+                  class="on-going-queue-list-item"
+                  *ngFor="let queue of onGoingQueues | filter : searchTerm"
+                >
+                  <div class="row">
+                    <div
+                      class="col d-flex align-items-center justify-content-center position-relative"
+                    >
+                      <div class="queue-number">
+                        <img
+                          src="assets/images/draggable-icon.svg"
+                          alt=""
+                          class="position-absolute top-50 start-0 translate-middle-y"
+                        />
+                        <h4>{{ queue.queueNumber }}</h4>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="customer-info">
+                        <div class="name">
+                          <img src="assets/images/person-icon.svg" alt="" />
+                          {{ queue.customerInfo.name || "N/A" }}
+                        </div>
+                        <div class="contact">
+                          <img src="assets/images/phone-icon.svg" alt="" />
+                          {{ queue.customerInfo.phoneNumber }}
+                        </div>
+                        <div class="persons">
+                          <img src="assets/images/people-icon.svg" alt="" />
+                          {{ getPersonCountText(queue.customerInfo.people) }}
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col d-flex align-items-center justify-content-center"
+                    >
+                      <div class="type-time-queued-data text-center">
+                        <span class="badge d-inline-block">{{
+                          getQueueType(queue.queueType)
+                        }}</span>
+                        <p>
+                          {{ queue.timeQueued | date : "shortTime" }}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="col-1 d-flex align-items-center justify-content-center"
+                    >
+                      <div class="options-button text-center" ngbDropdown>
+                        <button
+                          type="button"
+                          id="dropdownBasic1"
+                          ngbDropdownToggle
+                        >
+                          <img src="assets/images/action-icon.svg" alt="" />
+                        </button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button ngbDropdownItem>Send SMS Notification</button>
+                          <button ngbDropdownItem>Edit Queue</button>
+                          <button ngbDropdownItem>Remove Queue</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-1 d-flex align-items-center justify-content-center"
+                    >
+                      <div class="serve-button text-center">
+                        <button
+                          type="button"
+                          [disabled]="currentServing"
+                          (click)="serveSelectedQueue(queue.queueNumber)"
+                        >
+                          <img
+                            src="assets/images/arrow-full-right.svg"
+                            alt=""
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="queue-card-footer queue-card-footer-left d-flex justify-content-between"
+          >
+            <p>Total on-going queues</p>
+            <p>{{ onGoingQueues.length }} Queue(s)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- current serving queues -->
+      <div class="col-12 col-md-4">
+        <div class="queue-card">
+          <div class="queue-card-header">
+            <h5>CURRENT SERVING</h5>
+            <p class="mb-0">Customer queues that are called and served</p>
+          </div>
+
+          <div class="queue-card-sub-header">
+            <p class="mb-0">
+              <img src="assets/images/info-icon2.svg" alt="" /> Finish serving a
+              queue before you can serve another one
+            </p>
+          </div>
+
+          <div class="queue-card-body queue-card-body-right">
+            <div class="current-serving-card">
+              <ng-container *ngIf="currentServing">
+                <div class="current-serving-card-header text-center">
+                  <p class="mb-0">QUEUE NUMBER</p>
+                  <h2 class="mb-0">{{ currentServing!.queueNumber }}</h2>
+                  <span class="badge">{{
+                    getQueueType(currentServing.queueType)
+                  }}</span>
+                </div>
+                <div class="current-serving-card-body">
+                  <div class="current-serving-customer-details">
+                    <div class="d-flex">
+                      <p class="me-auto">Customer Name</p>
+                      <p>{{ currentServing!.customerInfo.name }}</p>
+                    </div>
+                    <div class="d-flex">
+                      <p class="me-auto">Mobile Number</p>
+                      <p>{{ currentServing!.customerInfo!.phoneNumber }}</p>
+                    </div>
+                    <div class="d-flex">
+                      <p class="me-auto">Number of People</p>
+                      <p>
+                        {{
+                          getPersonCountText(
+                            currentServing!.customerInfo!.people
+                          )
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="current-serving-time-details">
+                    <div class="d-flex">
+                      <p class="me-auto">Time Queued</p>
+                      <p>
+                        {{ currentServing.timeQueued | date : "shortTime" }}
+                      </p>
+                    </div>
+                    <div class="d-flex">
+                      <p class="me-auto">Time Served</p>
+                      <p>8:16 AM</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="current-serving-card-footer d-flex justify-content-center gap-3"
+                >
+                  <div ngbDropdown>
+                    <button type="button" id="dropdownBasic2" ngbDropdownToggle>
+                      <img
+                        src="assets/images/action-icon.svg"
+                        alt="action-icon"
+                      />
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                      <button ngbDropdownItem>Send SMS Notification</button>
+                      <button ngbDropdownItem>Edit Queue</button>
+                      <button ngbDropdownItem>Remove Queue</button>
+                    </div>
+                  </div>
+                  <button type="button">
+                    <img
+                      src="assets/images/speaker-icon.svg"
+                      alt="action-icon"
+                    />
+                    NOTIFY
+                  </button>
+                  <button
+                    type="button"
+                    (click)="setCurrentServingDone(currentServing.queueNumber)"
+                  >
+                    <img src="assets/images/check-icon.svg" alt="action-icon" />
+                    DONE
+                  </button>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="!currentServing"
+                >Please serve a queue</ng-container
+              >
+            </div>
+          </div>
+
+          <div
+            class="queue-card-footer queue-card-footer-right d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <p>Auto-serve next queue?</p>
+              <p class="mb-0">
+                Next queue to be serve:
+                <ng-container>{{
+                  nextQueueNumberToServe() || "None"
+                }}</ng-container>
+              </p>
+            </div>
+            <div class="form-check form-switch mb-0">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+                [(ngModel)]="isAutoServe"
+              />
+              <label
+                class="form-check-label"
+                for="flexSwitchCheckDefault"
+              ></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
