@@ -26,7 +26,7 @@ export class AddQueueComponent implements OnInit {
 
   newQueueForm = this.fb.group({
     name: [''],
-    phoneNumber: ['', Validators.required, Validators.minLength(13)],
+    phoneNumber: ['', [Validators.required, Validators.minLength(13)]],
     peopleCount: [1],
     // 1 = Walk-in / Prio
     // 2 = Walk-in
